@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/morphometrics-engine-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/morphometrics-engine-{{ version }}.tar.gz
   sha256: f845c1bcb2334ade757ce19d88508027a00142e9c25a8a59d0d4585c06586c26
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools-scm
   run:
     - magicgui
@@ -25,7 +25,7 @@ requirements:
     - napari-skimage-regionprops
     - numpy  
     - pandas
-    - python >=3.8
+    - python >={{ python_min }}
     - qtpy
     - superqt
     - toolz
@@ -39,6 +39,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/morphometrics/morphometrics-engine
